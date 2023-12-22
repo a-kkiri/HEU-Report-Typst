@@ -32,6 +32,11 @@
 
 文档编写过程中，在终端中使用 `make watch` 进行即时预览；文档编写完成后，使用 `make compile` 生成 PDF 文件。
 
+--------- 
+ **推荐使用 [Typst 在线模板](https://typst.app/project/rd-NAPdQ2N-vKz_qfwjXxd)**，模板已上传，复制到工作区使用。
+
+---------
+
 ## 模板预览
 
 |  [封面](https://github.com/a-kkiri/HEU-Report-Typst/blob/main/figures/cover.jpg) |  [正文](https://github.com/a-kkiri/HEU-Report-Typst/blob/main/figures/content.jpg)| 
