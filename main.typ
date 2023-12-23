@@ -85,10 +85,9 @@ raw text 中的中文字体可能较小，这是因为 Typst 无法为不同的�
 
 == 公式
 
-行内公式 $e^(i x) = cos x + i sin x$
+使用`#mi('LaTeX equation')` 编写行内公式 #mi(`e^{ix} = \cos x + i \sin x`)
 
-行间公式：
-$ e^(i x) = cos x + i sin x $
+使用`#mitex('LaTeX equation')` 编写行间公式：#mitex(`e^{ix} = cos x + i sin x`)
 
 == 代码
 
