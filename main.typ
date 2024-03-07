@@ -3,11 +3,16 @@
 
 #show: project.with(
   title: "课程设计",
-  course_name: "XXXX",
-  class_id: "xxxxxxxx",
-  student_id: "xxxxxxxxxx",
-  student_name: "X X X",
-  teacher_name: "X X X",
+  author: "X X X",
+  
+  infos: (
+    (key: "课程名称:", value: "XXXX"),
+    (key: "班" + h(2em) + "级:", value: "xxxxxxxx"),
+    (key: "学" + h(2em) + "号:", value: "xxxxxxxxxx"),
+    (key: "姓" + h(2em) + "名:", value: "X X X"),
+    (key: "任课教师:", value: "X X X"),
+
+  ),
 
   coverTable_display: true,
   outline_display: true,

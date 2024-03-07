@@ -4,11 +4,10 @@
 
 #let project(
   title: "",
-  course_name: "",
-  class_id: "",
-  student_id: "",
-  student_name: "",
-  teacher_name: "",
+  author: "",
+
+  infos: (
+  ),
 
   coverTable_display: true,
   outline_display: true,
@@ -35,7 +34,7 @@
   show raw: set text(font: code_font, 10pt)
 
   // 设置文档元数据和参考文献格式
-  set document(author: student_name, title: title)
+  set document(author: author, title: title)
   set bibliography(style: "gb-7714-2015-numeric")
 
   // 设置页面
@@ -51,7 +50,11 @@
         heading.where(level: 1).before(footers.first().location()), footers.first().location()
       )
       
-      emph(elems.last().body) + h(1fr) + emph(title)
+      if elems != () {
+        emph(elems.last().body) + h(1fr) + emph(title)
+      }else{
+        h(1fr) + emph(title)
+      }
       
       v(-7pt)
       align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
@@ -95,21 +98,22 @@
   }
 
   // Cover
-  let fieldname(name) = [
-    #align(right + top)[
-      #text(size: 字号.四号)[#name]
-    ]
-  ]
-
-  let fieldvalue(value) = [
+  let underlineField(key, value) = [
     #set align(center + horizon)
     #set text(size: 字号.小四)
     #grid(
-      rows: (auto, auto),
-      row-gutter: 0.2em,
-      value,
-      line(length: 95%, stroke: 0.5pt)
+      columns: (80pt, 255pt),
+      align(right + top)[
+        #text(size: 字号.四号)[#key]
+      ],
+      grid(
+        rows: (10pt, auto),
+        row-gutter: 0.2em,
+        value,
+        line(length: 95%, stroke: 0.5pt)
+      )
     )
+    #v(12pt)
   ]
 
   block(width: 100%, height: 15%, spacing: 0pt)[
@@ -127,20 +131,9 @@
 
   block(width: 100%, height: 35%, spacing: 0pt)[
     #set align(center + horizon)
-    #grid(
-        columns: (80pt, 250pt),
-        row-gutter: 2.2em,
-        fieldname("课程名称:"),
-        fieldvalue(course_name),
-        fieldname(text("班") + h(2em) + text("级:")),
-        fieldvalue(class_id),
-        fieldname(text("学") + h(2em) + text("号:")),
-        fieldvalue(student_id),
-        fieldname(text("姓") + h(2em) + text("名:")),
-        fieldvalue(student_name),
-        fieldname("任课教师:"),
-        fieldvalue(teacher_name),
-    )
+    #for i in infos{
+      underlineField(i.key, i.value)
+    } 
   ]
   
   if coverTable_display == true {
@@ -162,6 +155,8 @@
   ]}
 
   pagebreak()
+
+  counter(page).update(1)
 
   // 显示目录
   if outline_display{
