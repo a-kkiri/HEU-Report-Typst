@@ -1,7 +1,3 @@
-#import "@preview/tablex:0.0.7": tablex, hlinex, vlinex, colspanx, rowspanx
-#import "@preview/codelst:2.0.0": sourcecode, codelst
-#import "@preview/mitex:0.1.0": *
-
 #let project(
   title: "",
   author: "",
@@ -18,19 +14,21 @@
 
   // 文本和代码的字体
   let text_font = "Times New Roman"
-  let song_font = "SimSun"
-  let noto_serif_font = "Noto Serif CJK SC"
   let code_font = "DejaVu Sans Mono"
   let title_font = "STXinwei"
+  let songti = "SimSun"
+  let heiti = "SimHei"
 
   let 字号 = (
     四号: 14pt, 小四: 12pt,
   )
 
   // 设置正文和代码的字体
-  set text(font: (text_font, song_font), size: 12pt, lang: "zh", region: "cn")
-  show strong: set text(font: (text_font, noto_serif_font), size: 11.3pt)
-  show emph: set text(font: (text_font, noto_serif_font), size: 11.3pt)
+  set text(font: (text_font, songti), size: 12pt, lang: "zh", region: "cn")
+  show strong: it => {
+    show regex("[\p{hani}\s]+"): set text(stroke: 0.3pt)
+    it
+  }
   show raw: set text(font: code_font, 10pt)
 
   // 设置文档元数据和参考文献格式
@@ -70,24 +68,22 @@
   )
 
   //设置标题
-  set heading(numbering: "1.1")
+  set heading(numbering: "1.1 ")
 
   show heading: it => box(width: 100%)[
-    #v(0.50em)
-    #set text(font: noto_serif_font, weight: "bold")
+    #set text(font: (text_font, heiti))
     #if it.numbering != none { counter(heading).display() }
-    #h(0.75em)
     #it.body
+    #v(8pt)
   ]
 
   show heading.where(
     level: 1
   ): it => box(width: 100%)[
-    #v(0.5em)
+    #set heading(numbering: "一、")
     #set align(center)
-    #set heading(numbering: "一")
+    #v(4pt)
     #it
-    #v(0.75em)
   ]
 
   // 配置公式的编号和间距
@@ -102,7 +98,7 @@
     #set align(center + horizon)
     #set text(size: 字号.小四)
     #grid(
-      columns: (80pt, 255pt),
+      columns: (80pt, 250pt),
       align(right + top)[
         #text(size: 字号.四号)[#key]
       ],
@@ -110,7 +106,7 @@
         rows: (10pt, auto),
         row-gutter: 0.2em,
         value,
-        line(length: 95%, stroke: 0.5pt)
+        line(length: 98%, stroke: 0.5pt)
       )
     )
     #v(12pt)
@@ -139,18 +135,18 @@
   if coverTable_display == true {
   block(width: 100%,height: 25%, spacing: 0pt)[
     #set align(center + horizon)
-    #tablex(
+    #set text(size: 字号.小四)
+    #table(
       columns: 425pt,
-      rows: (35pt, 35pt, 105pt),
+      rows: (35pt, 140pt),
       stroke: 0.5pt,
       align: left + horizon,
-      auto-hlines: false,
-      hlinex(),
-      [#text(size: 字号.小四)[大作业成绩：]], 
-      hlinex(),
-      [#text(size: 字号.小四)[任课教师评语：]],
-      [],
-      hlinex(),
+
+      [大作业成绩：], 
+      table.cell(
+        align: top,
+        inset: (y: 12pt),
+      )[任课教师评语：],
     )
   ]}
 
@@ -192,9 +188,7 @@
   // 配置行内代码块、行间代码块
   show raw.where(block: false): it => box(fill: luma(240), inset: (x: 2pt), outset: (y: 3pt), radius: 1pt)[#it]
 
-  show raw.where(block: true): it => box(width: 100%, fill: luma(240), inset: 10pt, radius: 3pt)[#it]
-
-  show: codelst(reversed: true)
+  show raw.where(block: true): it => block(width: 100%, fill: luma(240), inset: 10pt, radius: 3pt, breakable: true)[#it]
 
   show ref: set text(orange)
 
