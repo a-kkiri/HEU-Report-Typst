@@ -30,12 +30,7 @@
 
 使用模板首先需配置 main.typ，设置标题、描述、作者等信息。如需要进一步更改文档格式，请修改 template.typ。
 
-文档编写过程中，在终端中使用 `make watch` 进行即时预览；文档编写完成后，使用 `make compile` 生成 PDF 文件。
-
---------- 
- **推荐使用 [Typst 在线模板](https://typst.app/project/rd-NAPdQ2N-vKz_qfwjXxd)**，模板已上传，复制到工作区使用。
-
----------
+文档编写过程中，在终端中使用 `typst watch --font-path ./fonts main.typ --root .` 进行即时预览；文档编写完成后，使用 `typst compile --font-path ./fonts main.typ` 生成 PDF 文件。
 
 ## 模板预览
 
