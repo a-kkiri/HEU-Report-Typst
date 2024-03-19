@@ -29,7 +29,11 @@
     show regex("[\p{hani}\s]+"): set text(stroke: 0.3pt)
     it
   }
-  show raw: set text(font: code_font, 10pt)
+  show raw: set text(font: (code_font, songti), 10pt)
+  show math.equation: it => {
+    show regex("[\p{hani}\s]+"): set text(font: songti)
+    it
+  }
 
   // 设置文档元数据和参考文献格式
   set document(author: author, title: title)
