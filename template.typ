@@ -152,7 +152,13 @@
         inset: (y: 12pt),
       )[任课教师评语：],
     )
-  ]}
+  ]}else{
+    block(width: 100%,height: 25%, spacing: 0pt)[
+      #set align(center + horizon)
+      #set text(size: 字号.四号)
+      #underline[哈尔滨工程大学本科生院]
+    ]
+  }
 
   pagebreak()
 
