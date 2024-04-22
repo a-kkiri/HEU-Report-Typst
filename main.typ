@@ -6,23 +6,22 @@
   author: "X X X",
   
   infos: (
-    (key: "课程名称:", value: "XXXX"),
-    (key: "班        级:", value: "xxxxxxxx"),
-    (key: "学        号:", value: "xxxxxxxxxx"),
-    (key: "姓        名:", value: "X X X"),
-    (key: "任课教师:", value: "X X X"),
+    (key: [课程名称:], value: "XXXX"),
+    (key: [班#h(2em)级:], value: "xxxxxxxx"),
+    (key: [学#h(2em)号:], value: "xxxxxxxxxx"),
+    (key: [姓#h(2em)名:], value: "X X X"),
+    (key: [任课教师:], value: "X X X"),
 
   ),
 
-  coverTable_display: true,
-  outline_display: true,
-  header_display: true,
+  coverTable_display: false, // 是否显示封面表格
+  outline_display: true,     // 是否显示大纲
+  header_display: true,      // 是否显示 header
 )
-
 
 = 模版简介
 
-本模板适用于编写哈尔滨工程大学课程报告，默认页边距为 2.5cm，中文宋体，英文 Times New Roman，字号为 12pt（小四）。
+本模板适用于编写哈尔滨工程大学课程报告，默认页边距为 2.5cm，中文使用中易宋体，英文使用 Times New Roman，字号为 12pt（小四）。
 
 默认模板文件由以下五部分组成：
 
@@ -121,20 +120,20 @@
 
 Typst 可以使用 Typst 原生语法插入公式，参考 #link("https://typst.app/docs/reference/math/")[typst/docs/math]。下面是一些公式插入的示例：
 
-首先是行内公式，例如 $a^2 + b^2 = c^2$。行内公式使用 `$$` 包裹，公式和两端的 `$$` 之间没有空格。
+首先是行内公式，例如 $integral_123^123a+b+c$ $a^2 + b^2 = c^2$。行内公式使用 `$$` 包裹，公式和两端的 `$$` 之间没有空格$$。
 
-其次是行间公式，例如：$ integral.triple_(Omega)\(frac(diff P, diff x) + frac(diff Q, diff y) + frac(diff R, diff z)\)d v = integral.surf_(Sigma)P d y d z + Q d z d x + R d x d y $ 式（1）是高斯公式。行间公式使用 `$$` 环境包裹，公式和两端的 `$$` 之间至少有一个空格。
+其次是行间公式，例如：$ integral.triple_(Omega)\(frac(diff P, diff x) + frac(diff Q, diff y) + frac(diff R, diff z)\)d v = integral.surf_(Sigma)P d y d z + Q d z d x + R d x d y $ 式（1）是高斯公式。行间公式使用 `$$` 环境包裹，公式和两端的 `$$` 之间至少有一个空格，若要显示公式编号请使用 `#equation()` 函数，如：#equation($ integral.triple_(Omega)\(frac(diff P, diff x) + frac(diff Q, diff y) + frac(diff R, diff z)\)d v = integral.surf_(Sigma)P d y d z + Q d z d x + R d x d y $)
 
 公式内可以使用换行符 `\` 换行。若需要对齐，每行可以包含一个或多个对齐点 `&` 对其进行对齐。例如：
 $ sum_i b_i &= sum_i sum_(h,j != i) frac(sigma_(h j) (i), sigma_(h j)) \ &= sum_(h != j) frac(1, sigma_(h j)) sum_(i != h,j) sigma_(h j)(i) $ `&` 是对齐的位置，`&` 可以有多个，但是每行的个数要相同。
 
 矩阵输入示例：
-$ A = mat(
+#equation($ A = mat(
   a_(1 1), a_(1 2), ..., a_(1 n);
   a_(2 1), a_(2 2), ..., a_(2 n);
   dots.v, dots.v, dots.down, dots.v;
   a_(n 1), a_(n 2), ..., a_(n n);
-) $ \
+) $) \
 
 
 分段函数可以使用 `case` 环境：

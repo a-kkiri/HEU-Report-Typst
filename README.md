@@ -38,6 +38,6 @@
 |:---:|:---:|
 | ![cover](https://github.com/a-kkiri/HEU-Report-Typst/blob/main/figures/cover.jpg?raw=true) | ![content](https://github.com/a-kkiri/HEU-Report-Typst/blob/main/figures/content.jpg?raw=true)|
 
-## 注意
 
- > 文档使用的中文字体仅包含约 7000 个通用汉字和符号，若出现某些字无法显示，请更换其他字体。
+> [!IMPORTANT]
+> 文档使用的中文字体仅包含约 7000 个通用汉字和符号，若出现某些字无法显示，请更换其他字体。

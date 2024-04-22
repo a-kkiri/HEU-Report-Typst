@@ -30,10 +30,6 @@
     it
   }
   show raw: set text(font: (code_font, songti), 10pt)
-  show math.equation: it => {
-    show regex("[\p{hani}\s]+"): set text(font: songti)
-    it
-  }
 
   // 设置文档元数据和参考文献格式
   set document(author: author, title: title)
@@ -91,10 +87,13 @@
   ]
 
   // 配置公式的编号和间距
-  set math.equation(numbering: "(1.1)")
   show math.equation: eq => {
     set block(spacing: 0.65em)
     eq
+  }
+  show math.equation: it => {
+    show regex("[\p{hani}\s]+"): set text(font: songti)
+    it
   }
 
   // Cover
@@ -136,29 +135,27 @@
     } 
   ]
   
-  if coverTable_display == true {
   block(width: 100%,height: 25%, spacing: 0pt)[
     #set align(center + horizon)
-    #set text(size: 字号.小四)
-    #table(
-      columns: 425pt,
-      rows: (35pt, 140pt),
-      stroke: 0.5pt,
-      align: left + horizon,
+    #if coverTable_display == true {
+      set text(size: 字号.小四)
+      table(
+        columns: 425pt,
+        rows: (35pt, 140pt),
+        stroke: 0.5pt,
+        align: left + horizon,
 
-      [大作业成绩：], 
-      table.cell(
-        align: top,
-        inset: (y: 12pt),
-      )[任课教师评语：],
-    )
-  ]}else{
-    block(width: 100%,height: 25%, spacing: 0pt)[
-      #set align(center + horizon)
-      #set text(size: 字号.四号)
-      #underline[哈尔滨工程大学本科生院]
-    ]
-  }
+        [大作业成绩：], 
+        table.cell(
+          align: top,
+          inset: (y: 12pt),
+        )[任课教师评语：],
+      )
+    }else{
+      set text(size: 字号.四号)
+      underline(offset: 2pt)[哈尔滨工程大学本科生院]
+    }
+  ]
 
   pagebreak()
 
@@ -200,10 +197,10 @@
 
   show raw.where(block: true): it => block(width: 100%, fill: luma(240), inset: 10pt, radius: 3pt, breakable: true)[#it]
 
-  show ref: set text(orange)
-
-  //show link: underline
-  show link: set text(rgb("#007aff"))
-
   body
+}
+
+// 公式编号
+#let equation(it) = {
+  math.equation(numbering: "(1)", block: true, it)
 }
