@@ -40,31 +40,32 @@
     paper: "a4",
     margin: auto,
 
-    header: locate(loc => {
-      if header_display == false or loc.page() == 1{return}
-      let footers = query(selector(<__footer__>).after(loc), loc)
-
-      let elems = query(
-        heading.where(level: 1).before(footers.first().location()), footers.first().location()
-      )
-      
-      if elems != () {
-        emph(elems.last().body) + h(1fr) + emph(title)
-      }else{
-        h(1fr) + emph(title)
+    header: context {
+      if here().page() == 1 {
+        return
       }
-      
+
+      let elems = query(heading.where(level: 1).after(here()))
+
+      let chapter-title = ""
+
+      if (elems == () or elems.first().location().page() != here().page()) {
+        let elems = query(heading.where(level: 1).before(here()))
+        chapter-title = elems.last().body
+      } else {
+        chapter-title = elems.first().body
+      }
+
+      emph(chapter-title) + h(1fr) + emph(title)
+
       v(-7pt)
       align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
-    }),
+    },
 
-    footer: locate(loc =>{
-      if loc.page() == 1 {return}
-      [
-        #align(center)[#counter(page).display("1 / 1",both: true,)]
-        #label("__footer__")
-      ]
-    })
+    footer: context {
+      if here().page() == 1 {return}
+      align(center)[#counter(page).display("1 / 1",both: true,)]
+    }
   )
 
   //设置标题
@@ -168,7 +169,7 @@
   }
 
   // Main body
-  set par(first-line-indent: 2em)
+  set par(first-line-indent: 2em, justify: true)
   set enum(tight:false, indent: 2em, body-indent: 8pt)
   set list(tight:false, indent: 2em, body-indent: 8pt)
 
